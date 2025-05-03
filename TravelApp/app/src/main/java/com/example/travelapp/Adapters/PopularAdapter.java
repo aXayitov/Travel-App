@@ -1,5 +1,6 @@
 package com.example.travelapp.Adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
+import com.example.travelapp.Activities.DetailActivity;
 import com.example.travelapp.Domains.PopularDomain;
 import com.example.travelapp.R;
 
@@ -20,11 +22,9 @@ import java.util.ArrayList;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
     ArrayList<PopularDomain> items;
-    DecimalFormat formatter;
 
     public PopularAdapter(ArrayList<PopularDomain> items) {
         this.items = items;
-        formatter = new DecimalFormat("###,###,###,###");
     }
 
     @NonNull
@@ -47,6 +47,12 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
                 .load(drawableResId)
                 .transform(new CenterCrop(), new GranularRoundedCorners(40, 40, 40, 40))
                 .into(holder.pic);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
+            intent.putExtra("object", items.get(position));
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 
     @Override
