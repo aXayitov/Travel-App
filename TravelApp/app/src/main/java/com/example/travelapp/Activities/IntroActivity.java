@@ -1,9 +1,14 @@
-package com.example.travelapp;
+package com.example.travelapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.example.travelapp.R;
 
 public class IntroActivity extends AppCompatActivity {
     @Override
@@ -11,5 +16,8 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.intro_activity);
+
+        ConstraintLayout introBtn = findViewById(R.id.introBtn);
+        introBtn.setOnClickListener(v -> startActivity(new Intent(IntroActivity.this, MainActivity.class)));
     }
 }
